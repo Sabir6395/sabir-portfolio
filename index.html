@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohammad Sabir Shareef — Flutter Developer &amp; AI Evaluator</title>
+  <meta name="description" content="Portfolio of Mohammad Sabir Shareef, a Flutter developer and AI coding evaluator building cross-platform apps with Flutter, Dart, Python, Firebase and REST APIs.">
+  <meta name="theme-color" content="#0b0f14">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+
+  <!-- Tells the CSS that JavaScript is running (used by the mobile menu and animations) -->
+  <script>document.documentElement.classList.add("js");</script>
+
+  <!-- Google Fonts: JetBrains Mono + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- Lets keyboard users jump past the navigation -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== Navbar ===== -->
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a class="nav-logo" href="#hero" aria-label="Mohammad Sabir Shareef, back to top">MSS</a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#experience">Experience</a></li>
+        <li><a class="nav-link" href="#projects">Projects</a></li>
+        <li><a class="nav-link" href="#skills">Skills</a></li>
+        <li><a class="nav-link" href="#certifications">Certifications</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section id="hero" class="hero" aria-label="Introduction">
+      <div class="container hero-inner">
+
+        <!-- Terminal card -->
+        <div class="terminal">
+          <div class="terminal-bar" aria-hidden="true">
+            <span class="terminal-dot terminal-dot--red"></span>
+            <span class="terminal-dot terminal-dot--yellow"></span>
+            <span class="terminal-dot terminal-dot--green"></span>
+            <span class="terminal-title">sabir@portfolio: ~</span>
+          </div>
+
+          <!-- Screen readers get this summary instead of the animated text -->
+          <p class="sr-only">Verification report: Flutter and Dart, AI and LLM evaluation, REST APIs and Firebase, debugging and testing. 4 of 4 checks passed. Ready to build.</p>
+
+          <!-- The visual terminal. main.js types these lines out one by one. -->
+          <div class="terminal-body" aria-hidden="true">
+            <p class="terminal-line"><span class="t-prompt">$</span> verify <span class="t-flag">--candidate</span> sabir</p>
+            <p class="terminal-line"><span class="t-pass">✓</span> Flutter &amp; Dart <span class="t-dots">........</span> <span class="t-pass">PASS</span></p>
+            <p class="terminal-line"><span class="t-pass">✓</span> AI/LLM Evaluation <span class="t-dots">.....</span> <span class="t-pass">PASS</span></p>
+            <p class="terminal-line"><span class="t-pass">✓</span> REST APIs &amp; Firebase <span class="t-dots">..</span> <span class="t-pass">PASS</span></p>
+            <p class="terminal-line"><span class="t-pass">✓</span> Debugging &amp; Testing <span class="t-dots">...</span> <span class="t-pass">PASS</span></p>
+            <p class="terminal-line"><span class="t-muted">Result:</span> <span class="t-pass">4/4 checks passed</span> — <span class="t-info">Ready to build.</span></p>
+          </div>
+        </div>
+
+        <!-- Name and intro -->
+        <div class="hero-text">
+          <h1 class="hero-name">Mohammad Sabir Shareef</h1>
+          <p class="hero-title">Flutter Developer · AI Coding Evaluator</p>
+          <p class="hero-subtitle">B.Tech Mechanical Engineering, IIT Roorkee (2022–2027)</p>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/Sabir6395" target="_blank" rel="noopener">
+            View GitHub<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/mohammad-sabir-shareef-aa3334362/" target="_blank" rel="noopener">
+            LinkedIn<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section id="about">
+      <div class="container">
+        <h2 class="section-title">About</h2>
+        <div class="about-grid">
+          <img class="about-photo" src="assets/profile.jpg" alt="Portrait of Mohammad Sabir Shareef"
+               width="515" height="484" loading="lazy" decoding="async">
+          <p class="about-text">
+            Software developer and AI/Data Training professional with 1+ year of hands-on experience
+            building, testing, debugging and integrating cross-platform apps with Flutter, Dart, Python,
+            REST APIs and Firebase. Experienced in AI model, LLM and prompt evaluation at
+            Handshake AI – Project Dynamo.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience (timeline of "test case" cards) ===== -->
+    <section id="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+
+        <ol class="timeline" role="list">
+          <li class="timeline-item">
+            <article class="card test-card">
+              <div class="test-card-meta">
+                <span class="badge">✓ PASS</span>
+                <span class="test-card-dates"><time datetime="2026-07">Jul 2026</time> – <time datetime="2026-09">Sep 2026</time></span>
+              </div>
+              <h3 class="test-card-role">AI Trainer / AI Coding Evaluator</h3>
+              <p class="test-card-company">Handshake AI · Project Dynamo</p>
+              <ul class="test-card-list">
+                <li>Evaluated AI-generated code against task requirements and acceptance criteria, giving structured feedback on correctness and implementation quality.</li>
+                <li>Handled machine-learning tasks including hyperparameter tuning, debugging and regression testing.</li>
+                <li>Worked in Git workflows (forks, branches, pull requests, reviews) and strengthened verifiers with reproducible tests.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="timeline-item">
+            <article class="card test-card">
+              <div class="test-card-meta">
+                <span class="badge">✓ PASS</span>
+                <span class="test-card-dates"><time datetime="2025-02">Feb 2025</time> – <time datetime="2026-06">Jun 2026</time></span>
+              </div>
+              <h3 class="test-card-role">Flutter Frontend Developer</h3>
+              <p class="test-card-company">Stealth Startup</p>
+              <ul class="test-card-list">
+                <li>Built 15+ responsive Flutter screens for authentication, onboarding and dashboards.</li>
+                <li>Integrated REST APIs and built reusable components with structured state management.</li>
+                <li>Followed an Agile, Git-based workflow and worked with designers on pixel-accurate UI.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="timeline-item">
+            <article class="card test-card">
+              <div class="test-card-meta">
+                <span class="badge">✓ PASS</span>
+                <span class="test-card-dates"><time datetime="2025-02">Feb 2025</time> – <time datetime="2025-05">May 2025</time></span>
+              </div>
+              <h3 class="test-card-role">UI/UX Designer</h3>
+              <p class="test-card-company">Stealth Startup</p>
+              <ul class="test-card-list">
+                <li>Designed mobile interfaces, wireframes and user journeys focused on usability and consistency.</li>
+                <li>Turned product requirements into user flows the development team could implement.</li>
+              </ul>
+            </article>
+          </li>
+
+          <li class="timeline-item">
+            <article class="card test-card">
+              <div class="test-card-meta">
+                <span class="badge">✓ PASS</span>
+                <span class="test-card-dates"><time datetime="2025-02">Feb 2025</time> – <time datetime="2025-04">Apr 2025</time></span>
+              </div>
+              <h3 class="test-card-role">Android Developer</h3>
+              <p class="test-card-company">Freelance</p>
+              <ul class="test-card-list">
+                <li>Built Flutter-based Android apps with REST API integration and responsive interfaces.</li>
+                <li>Tested, debugged and optimized app performance, validating features against requirements.</li>
+              </ul>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section id="projects">
+      <div class="container">
+        <h2 class="section-title">Projects</h2>
+
+        <div class="projects-grid">
+          <article class="card project-card">
+            <div class="project-card-top">
+              <h3 class="project-title">Task Management App</h3>
+              <span class="ci-badge"><span class="ci-badge-label">status</span><span class="ci-badge-value">passing</span></span>
+            </div>
+            <p class="project-date"><time datetime="2025-12">Dec 2025</time> – <time datetime="2026-03">Mar 2026</time></p>
+            <p class="project-desc">
+              A responsive task-management app with Firebase Authentication, cloud-backed data in
+              Firestore and state management with Provider, built from reusable UI components.
+            </p>
+            <ul class="tags" role="list" aria-label="Technologies">
+              <li class="tag">Flutter</li>
+              <li class="tag">Firebase Auth</li>
+              <li class="tag">Firestore</li>
+              <li class="tag">Provider</li>
+            </ul>
+          </article>
+
+          <article class="card project-card">
+            <div class="project-card-top">
+              <h3 class="project-title">E-Commerce App</h3>
+              <span class="ci-badge"><span class="ci-badge-label">status</span><span class="ci-badge-value">passing</span></span>
+            </div>
+            <p class="project-date"><time datetime="2025-04">Apr 2025</time> – <time datetime="2025-07">Jul 2025</time></p>
+            <p class="project-desc">
+              A responsive Flutter shopping app with a dynamic product catalog loaded from REST APIs,
+              reusable widgets and mobile-first shopping flows.
+            </p>
+            <ul class="tags" role="list" aria-label="Technologies">
+              <li class="tag">Flutter</li>
+              <li class="tag">REST APIs</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section id="skills">
+      <div class="container">
+        <h2 class="section-title">Skills</h2>
+
+        <div class="skills-grid">
+          <div class="card skill-group">
+            <h3 class="skill-group-title">Programming</h3>
+            <ul class="tags" role="list">
+              <li class="tag">Python</li>
+              <li class="tag">Dart</li>
+            </ul>
+          </div>
+
+          <div class="card skill-group">
+            <h3 class="skill-group-title">AI/ML &amp; Evaluation</h3>
+            <ul class="tags" role="list">
+              <li class="tag">LLM Evaluation</li>
+              <li class="tag">Prompt Evaluation</li>
+              <li class="tag">Hyperparameter Tuning</li>
+              <li class="tag">AI Benchmarking</li>
+            </ul>
+          </div>
+
+          <div class="card skill-group">
+            <h3 class="skill-group-title">Mobile</h3>
+            <ul class="tags" role="list">
+              <li class="tag">Flutter</li>
+              <li class="tag">Android</li>
+              <li class="tag">Responsive UI</li>
+              <li class="tag">REST APIs</li>
+            </ul>
+          </div>
+
+          <div class="card skill-group">
+            <h3 class="skill-group-title">Backend &amp; Architecture</h3>
+            <ul class="tags" role="list">
+              <li class="tag">Firebase</li>
+              <li class="tag">Firestore</li>
+              <li class="tag">Provider</li>
+              <li class="tag">MVVM</li>
+              <li class="tag">Clean Architecture</li>
+            </ul>
+          </div>
+
+          <div class="card skill-group">
+            <h3 class="skill-group-title">Testing</h3>
+            <ul class="tags" role="list">
+              <li class="tag">Regression Testing</li>
+              <li class="tag">Debugging</li>
+              <li class="tag">Code Review</li>
+            </ul>
+          </div>
+
+          <div class="card skill-group">
+            <h3 class="skill-group-title">Tools</h3>
+            <ul class="tags" role="list">
+              <li class="tag">Git</li>
+              <li class="tag">GitHub</li>
+              <li class="tag">Docker</li>
+              <li class="tag">Postman</li>
+              <li class="tag">Figma</li>
+              <li class="tag">VS Code</li>
+              <li class="tag">Android Studio</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Certifications, Leadership & Languages ===== -->
+    <section id="certifications">
+      <div class="container">
+        <h2 class="section-title">Certifications</h2>
+
+        <div class="info-grid">
+          <div class="card">
+            <h3 class="info-card-title">Courses</h3>
+            <ul class="check-list" role="list">
+              <li>Mobile App Development <span class="check-list-meta">Udemy</span></li>
+              <li>Flutter &amp; Dart <span class="check-list-meta">Coursera</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="info-card-title">Leadership</h3>
+            <ul class="check-list" role="list">
+              <li>International Relations Club <span class="check-list-meta">IIT Roorkee</span></li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3 class="info-card-title">Languages</h3>
+            <ul class="check-list" role="list">
+              <li>English <span class="check-list-meta">Professional</span></li>
+              <li>Hindi <span class="check-list-meta">Native</span></li>
+              <li>Urdu <span class="check-list-meta">Native</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section id="contact" class="contact">
+      <div class="container">
+        <p class="contact-kicker" aria-hidden="true">$ exit 0</p>
+        <h2 class="contact-heading">All checks passed. Let's build something.</h2>
+        <a class="contact-email" href="mailto:sabir.gusknp2022@gmail.com">sabir.gusknp2022@gmail.com</a>
+
+        <div class="contact-actions">
+          <a class="btn btn-primary" href="mailto:sabir.gusknp2022@gmail.com">Send an email</a>
+          <a class="btn btn-secondary" href="https://github.com/Sabir6395" target="_blank" rel="noopener">
+            GitHub<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+          <a class="btn btn-secondary" href="https://www.linkedin.com/in/mohammad-sabir-shareef-aa3334362/" target="_blank" rel="noopener">
+            LinkedIn<span class="sr-only"> (opens in a new tab)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 Mohammad Sabir Shareef</p>
+    </div>
+  </footer>
+</body>
+</html>

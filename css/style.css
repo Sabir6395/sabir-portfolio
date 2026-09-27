@@ -1,0 +1,996 @@
+/* ==========================================================
+   Portfolio styles — Mohammad Sabir Shareef
+   Theme: a software "verification report" / test-runner output
+
+   Contents
+    1. Design tokens        9. Experience timeline
+    2. Reset               10. Projects
+    3. Base styles         11. Skills
+    4. Utilities           12. Certifications
+    5. Layout              13. Contact & footer
+    6. Components          14. Scroll animations
+    7. Navbar              15. Responsive (tablet & desktop)
+    8. Hero & terminal     16. Reduced motion
+   ========================================================== */
+
+
+/* ----------------------------------------------------------
+   1. Design tokens
+   Every color, font, size and spacing value lives here.
+   Change a value once and it updates across the whole site.
+   ---------------------------------------------------------- */
+:root {
+  /* Colors */
+  --color-bg: #0b0f14;            /* page background (terminal black) */
+  --color-surface: #111821;       /* cards and panels on top of the bg */
+  --color-border: #1f2a37;        /* subtle dividers and outlines */
+  --color-text: #e5e7eb;          /* main readable text */
+  --color-muted: #9ca3af;         /* secondary text, comments, dates */
+  --color-accent: #22c55e;        /* "test passed" green */
+  --color-accent-hover: #4ade80;  /* lighter green for hover states */
+  --color-secondary: #38bdf8;     /* info blue for links and keywords */
+
+  /* Terminal window dots (macOS style) */
+  --color-dot-red: #ff5f57;
+  --color-dot-yellow: #febc2e;
+  --color-dot-green: #28c840;
+
+  /* Fonts */
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Font sizes (rem = relative to the browser's base size, usually 16px) */
+  --text-xs: 0.75rem;    /* 12px */
+  --text-sm: 0.875rem;   /* 14px */
+  --text-base: 1rem;     /* 16px */
+  --text-lg: 1.25rem;    /* 20px */
+  --text-xl: 1.75rem;    /* 28px */
+  --text-2xl: 2.5rem;    /* 40px */
+
+  /* Spacing scale: use these for margins, padding and gaps */
+  --space-1: 0.25rem;    /* 4px */
+  --space-2: 0.5rem;     /* 8px */
+  --space-3: 1rem;       /* 16px */
+  --space-4: 1.5rem;     /* 24px */
+  --space-5: 2rem;       /* 32px */
+  --space-6: 3rem;       /* 48px */
+  --space-7: 5rem;       /* 80px */
+
+  /* Border radius */
+  --radius-sm: 4px;      /* small elements: tags, badges */
+  --radius-md: 8px;      /* cards and buttons */
+  --radius-lg: 12px;     /* large panels */
+  --radius-pill: 999px;  /* fully rounded pills */
+
+  /* Layout */
+  --container-width: 1100px;
+  --gutter: 16px;        /* side padding so content never touches the screen edge */
+  --header-height: 64px;
+
+  /* Motion */
+  --transition: 0.2s ease;
+}
+
+
+/* ----------------------------------------------------------
+   2. CSS reset
+   Removes inconsistent browser defaults so every browser
+   starts from the same baseline.
+   ---------------------------------------------------------- */
+
+/* Width and height include padding and border (much easier to reason about) */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;                           /* smooth scrolling for #links */
+  scroll-padding-top: var(--header-height);          /* stop the sticky navbar covering headings */
+  -webkit-text-size-adjust: 100%;                    /* stop iOS from auto-enlarging text */
+}
+
+/* Images and media never overflow their container */
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+/* Form elements inherit the site font instead of the browser default */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Remove bullets from lists we use for layout (nav, tags, etc.) */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Long words and URLs wrap instead of breaking the layout */
+p,
+h1,
+h2,
+h3,
+h4 {
+  overflow-wrap: break-word;
+}
+
+
+/* ----------------------------------------------------------
+   3. Base styles
+   Default look for plain HTML elements.
+   ---------------------------------------------------------- */
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;  /* crisper text on macOS */
+}
+
+/* Headings use the monospace font for the "code output" feel */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-mono);
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl); }
+h3 { font-size: var(--text-lg); }
+
+/* Inline code and code blocks */
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.95em;
+}
+
+/* Links: blue by default, green on hover (like a passing test) */
+a {
+  color: var(--color-secondary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+/* Visible focus ring for keyboard users (accessibility) */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* Highlighted text uses the accent color */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+}
+
+
+/* ----------------------------------------------------------
+   4. Utilities
+   ---------------------------------------------------------- */
+
+/* Hidden on screen but still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* "Skip to content" link: off screen until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 200;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+  color: var(--color-bg);
+}
+
+
+/* ----------------------------------------------------------
+   5. Layout
+   ---------------------------------------------------------- */
+
+/* Centers content and caps its width on large screens */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;            /* left + right auto = centered */
+  padding-inline: var(--gutter);  /* 16px on the left and right */
+}
+
+/* Vertical breathing room between page sections (grows on bigger screens, see section 15) */
+section {
+  padding-block: var(--space-6);
+}
+
+/* Section title renders like a test block: describe('Experience')
+   Write only the word in HTML: <h2 class="section-title">Experience</h2>
+   CSS adds describe(' before and ') after. */
+.section-title {
+  font-family: var(--font-mono);
+  font-size: clamp(1.125rem, 0.8rem + 2.2vw, var(--text-xl));  /* shrinks on phones so it never overflows */
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: var(--space-5);
+}
+
+/* describe(' — the function name in blue */
+.section-title::before {
+  content: "describe('";
+  color: var(--color-secondary);
+}
+
+/* ') — closing quote and bracket in muted gray */
+.section-title::after {
+  content: "')";
+  color: var(--color-muted);
+}
+
+
+/* ----------------------------------------------------------
+   6. Components (reused across sections)
+   ---------------------------------------------------------- */
+
+/* Card: the dark panel used for experience, projects, skills... */
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;                       /* comfortable tap target on phones */
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  transition: transform var(--transition), background-color var(--transition),
+              border-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+/* Solid green button */
+.btn-primary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  color: var(--color-bg);
+  box-shadow: 0 8px 24px -8px rgb(34 197 94 / 0.6);
+}
+
+/* Outlined button */
+.btn-secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Lift effects only on devices with a real mouse (avoids "sticky" hover on phones) */
+@media (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: rgb(34 197 94 / 0.45);
+    box-shadow: 0 16px 32px -16px rgb(0 0 0 / 0.8);
+  }
+}
+
+/* "✓ PASS" badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-accent);
+  background: rgb(34 197 94 / 0.12);
+  border: 1px solid rgb(34 197 94 / 0.35);
+  border-radius: var(--radius-sm);
+}
+
+/* Two-part CI badge like the ones on GitHub READMEs: [status | passing] */
+.ci-badge {
+  display: inline-flex;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ci-badge-label {
+  padding: 0.125rem 0.5rem;
+  background: var(--color-border);
+  color: var(--color-text);
+}
+
+.ci-badge-value {
+  padding: 0.125rem 0.5rem;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 700;
+}
+
+/* Small pill tags (tech stack, skills) */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: 0.25rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-secondary);
+  background: rgb(56 189 248 / 0.08);
+  border: 1px solid rgb(56 189 248 / 0.25);
+  border-radius: var(--radius-pill);
+  transition: border-color var(--transition), background-color var(--transition);
+}
+
+.tag:hover {
+  background: rgb(56 189 248 / 0.16);
+  border-color: rgb(56 189 248 / 0.5);
+}
+
+
+/* ----------------------------------------------------------
+   7. Navbar
+   ---------------------------------------------------------- */
+
+/* Sticks to the top; the see-through background blurs content behind it */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgb(11 15 20 / 0.85);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Logo on the left, links on the right */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--header-height);
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.nav-logo:hover {
+  color: var(--color-accent-hover);
+}
+
+.nav-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1) var(--space-4);
+}
+
+.nav-link {
+  position: relative;
+  display: block;
+  padding-block: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.nav-link:hover {
+  color: var(--color-text);
+}
+
+/* Active link (set by main.js while scrolling) gets a green underline */
+.nav-link.is-active {
+  color: var(--color-accent);
+}
+
+.nav-link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 2px;
+}
+
+/* Hamburger button: hidden on desktop, shown on phones (see below) */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  width: 20px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: transform var(--transition), opacity var(--transition);
+}
+
+/* When open, the three bars turn into an X */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Phones: collapse links into a dropdown panel.
+   Scoped to .js so the links stay visible if JavaScript fails. */
+@media (max-width: 767px) {
+  .js .nav-toggle {
+    display: flex;
+  }
+
+  .js .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+    padding: var(--space-2) var(--gutter) var(--space-3);
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .js .nav-menu.is-open {
+    display: flex;
+  }
+
+  .js .nav-link {
+    padding-block: var(--space-3);
+    font-size: var(--text-base);
+  }
+
+  .js .nav-menu li + li {
+    border-top: 1px solid var(--color-border);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   8. Hero & terminal
+   ---------------------------------------------------------- */
+
+/* Fills the screen below the navbar and centers its content vertically */
+.hero {
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100svh - var(--header-height));  /* svh ignores mobile browser toolbars */
+}
+
+.hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+
+/* The terminal window */
+.terminal {
+  width: 100%;
+  max-width: 680px;
+  text-align: left;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.8);
+  overflow: hidden;
+}
+
+/* Title bar with the three colored dots */
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0.75rem var(--space-3);
+  background: rgb(255 255 255 / 0.02);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot--red    { background: var(--color-dot-red); }
+.terminal-dot--yellow { background: var(--color-dot-yellow); }
+.terminal-dot--green  { background: var(--color-dot-green); }
+
+.terminal-title {
+  margin-left: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-muted);
+}
+
+/* The output area */
+.terminal-body {
+  padding: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 0.6rem + 0.9vw, 0.95rem);
+  line-height: 1.7;
+}
+
+/* Each line keeps its height even while empty, so the page doesn't jump during typing */
+.terminal-line {
+  min-height: 1.7em;
+  white-space: pre-wrap;
+}
+
+.terminal-line:first-child {
+  margin-bottom: var(--space-2);
+}
+
+/* Hide the text until main.js has cleared it for typing (avoids a flash of the full text) */
+.js .terminal-body:not(.is-ready) {
+  visibility: hidden;
+}
+
+/* Syntax colors inside the terminal */
+.t-prompt,
+.t-pass  { color: var(--color-accent); }
+.t-flag,
+.t-info  { color: var(--color-secondary); }
+.t-muted,
+.t-dots  { color: var(--color-muted); }
+
+/* Blinking block cursor */
+.terminal-caret {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.15em;
+  background: var(--color-accent);
+  animation: caret-blink 1s step-end infinite;
+}
+
+@keyframes caret-blink {
+  50% { opacity: 0; }
+}
+
+/* Name, title and subtitle */
+.hero-name {
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.5rem);
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-3);
+}
+
+.hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 0.9rem + 0.6vw, var(--text-lg));
+  color: var(--color-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.hero-subtitle {
+  color: var(--color-muted);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+
+/* ----------------------------------------------------------
+   9. About & experience timeline
+   ---------------------------------------------------------- */
+/* Phones: photo stacked above the text. Tablet+: side by side (see section 15). */
+.about-grid {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-5);
+}
+
+/* Round photo with a green "passing" ring around it */
+.about-photo {
+  width: 180px;
+  aspect-ratio: 1;               /* always a perfect square, so the circle isn't squashed */
+  height: auto;
+  object-fit: cover;             /* crop to fill the square instead of stretching */
+  object-position: 50% 20%;      /* keep the face in frame when cropping */
+  border-radius: 50%;
+  border: 3px solid var(--color-accent);
+  outline: 1px solid var(--color-border);
+  outline-offset: 5px;
+  background: var(--color-surface);
+}
+
+.about-text {
+  max-width: 70ch;                /* ~70 characters per line is easiest to read */
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+}
+
+/* Vertical line down the left, with a dot per entry */
+.timeline {
+  --timeline-offset: var(--space-4);  /* space between the line and the cards */
+  position: relative;
+  display: grid;
+  gap: var(--space-4);
+  padding-left: var(--timeline-offset);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: var(--space-2);
+  bottom: var(--space-2);
+  left: 7px;
+  width: 2px;
+  background: var(--color-border);
+}
+
+.timeline-item {
+  position: relative;
+}
+
+/* The dot sits on the line, next to each card's badge */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: calc(var(--space-4) + 4px);
+  left: calc(2px - var(--timeline-offset));
+  width: 12px;
+  height: 12px;
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  border-radius: 50%;
+}
+
+/* Badge and dates row */
+.test-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.test-card-dates {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.test-card-role {
+  margin-bottom: var(--space-1);
+}
+
+.test-card-company {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-secondary);
+}
+
+.test-card-list {
+  display: grid;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  padding-left: 1.25rem;
+  list-style: disc;  /* nested lists default to hollow circles */
+  color: var(--color-muted);
+}
+
+.test-card-list li::marker {
+  color: var(--color-accent);
+}
+
+
+/* ----------------------------------------------------------
+   10. Projects
+   ---------------------------------------------------------- */
+
+/* As many 320px+ columns as fit; min() stops overflow on tiny screens */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: var(--space-4);
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.project-card-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.project-date {
+  margin-top: calc(-1 * var(--space-2));  /* sit closer to the title */
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+.project-desc {
+  color: var(--color-muted);
+}
+
+/* Push the tags to the bottom so both cards line up */
+.project-card .tags {
+  margin-top: auto;
+}
+
+
+/* ----------------------------------------------------------
+   11. Skills
+   ---------------------------------------------------------- */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--space-4);
+}
+
+/* Group titles look like code comments: // Programming */
+.skill-group-title {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.skill-group-title::before {
+  content: "// ";
+  color: var(--color-muted);
+}
+
+
+/* ----------------------------------------------------------
+   12. Certifications, leadership & languages
+   ---------------------------------------------------------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: var(--space-4);
+}
+
+.info-card-title {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-base);
+  font-weight: 500;
+}
+
+.info-card-title::before {
+  content: "// ";
+  color: var(--color-muted);
+}
+
+/* List with a green ✓ before each item */
+.check-list {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.check-list li {
+  position: relative;
+  padding-left: var(--space-4);
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+/* Source or level shown under the item name */
+.check-list-meta {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+
+/* ----------------------------------------------------------
+   13. Contact & footer
+   ---------------------------------------------------------- */
+.contact {
+  text-align: center;
+}
+
+.contact-kicker {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+}
+
+.contact-heading {
+  max-width: 20ch;
+  margin: 0 auto var(--space-4);
+  font-size: clamp(1.75rem, 1rem + 3.5vw, 2.75rem);
+  letter-spacing: -0.02em;
+}
+
+.contact-email {
+  display: inline-block;
+  margin-bottom: var(--space-5);
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, var(--text-lg));
+  overflow-wrap: anywhere;
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+}
+
+.site-footer {
+  padding-block: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+
+/* ----------------------------------------------------------
+   14. Scroll animations
+   main.js adds .reveal to each section, then .is-visible
+   when the section scrolls into view.
+   ---------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+
+/* ----------------------------------------------------------
+   15. Responsive: tablet & desktop
+   Styles above are mobile-first; these add space on wider screens.
+   ---------------------------------------------------------- */
+@media (min-width: 768px) {
+  section {
+    padding-block: var(--space-7);
+  }
+
+  .terminal-body {
+    padding: var(--space-4);
+  }
+
+  .about-grid {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-items: start;
+    gap: var(--space-6);
+  }
+
+  .about-photo {
+    width: 200px;
+  }
+
+  .timeline {
+    --timeline-offset: var(--space-5);
+  }
+}
+
+
+/* ----------------------------------------------------------
+   16. Reduced motion
+   Visitors who turn off animations in their OS settings get
+   instant scrolling and no movement.
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
