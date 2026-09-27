@@ -2,7 +2,7 @@
 
 A personal portfolio website styled like a software verification report, built with plain HTML, CSS and JavaScript.
 
-**Live site:** _coming soon_
+**Live site:** [sabir6395.github.io/sabir-portfolio](https://sabir6395.github.io/sabir-portfolio/)
 
 ## Tech stack
 
